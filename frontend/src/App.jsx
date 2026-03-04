@@ -8,12 +8,18 @@ const API = import.meta.env.VITE_API_URL || 'http://localhost:4000';
 export default function App(){
   const [token,setToken] = useState(null);
   const [user,setUser] = useState(null);
+  const [theme,setTheme] = useState(localStorage.getItem('theme') || 'light');
 
   useEffect(()=>{
     const t = localStorage.getItem('token');
     const u = localStorage.getItem('user');
     if (t){ setToken(t); setUser(JSON.parse(u)); }
   },[])
+
+  useEffect(() => {
+    document.documentElement.setAttribute('data-theme', theme);
+    localStorage.setItem('theme', theme);
+  }, [theme]);
 
   function onLogin(token,user){
     setToken(token); setUser(user);
@@ -27,7 +33,7 @@ export default function App(){
 
   return (
     <div className="app">
-      <Header user={user} onLogout={onLogout} />
+      <Header user={user} onLogout={onLogout} theme={theme} setTheme={setTheme} />
       <main className="container">
         {user?.role === 'admin' && <AdminPanel apiBase={API} token={token} user={user} />}
         <h2>Galería de Ejemplo</h2>
