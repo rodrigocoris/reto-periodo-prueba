@@ -48,10 +48,11 @@ export default function Items({apiBase, token, onLogin}){
       <section className="grid">
         {items.map(it=> (
           <article className="card" key={it.id}>
+            {it.image && <img src={it.image} alt={it.title} style={{width:'100%',height:'200px',objectFit:'cover',borderRadius:'8px',marginBottom:'12px'}} />}
             <div className="card-body">
               <h5>{it.title}</h5>
-              <p className="muted">{it.category}</p>
-              <p>{it.description}</p>
+              <p className="muted" style={{marginTop:'4px'}}>{it.category}</p>
+              <p style={{fontSize:'0.9rem',lineHeight:'1.5',margin:'8px 0 0'}}>{it.description}</p>
             </div>
           </article>
         ))}

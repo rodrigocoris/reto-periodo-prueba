@@ -95,7 +95,7 @@ export default function AdminPanel({ apiBase, token, user }) {
 
   return (
     <div className="admin-panel">
-      <h3>Panel Admin - Gestión de Items</h3>
+      <h3>Panel Admin - Gestion de Items</h3>
       
       <form onSubmit={handleSubmit} className="admin-form">
         <input
@@ -135,14 +135,27 @@ export default function AdminPanel({ apiBase, token, user }) {
         <h4>Items ({items.length})</h4>
         <table className="items-table">
           <thead>
-            <tr><th>ID</th><th>Título</th><th>Categoría</th><th>Acciones</th></tr>
+            <tr>
+              <th>ID</th>
+              <th>Título</th>
+              <th>Descripción</th>
+              <th>Categoría</th>
+              <th>Imagen</th>
+              <th>Acciones</th>
+            </tr>
           </thead>
           <tbody>
             {items.map(item => (
               <tr key={item.id}>
                 <td>{item.id}</td>
                 <td>{item.title}</td>
+                <td>{item.description}</td>
                 <td>{item.category}</td>
+                <td>
+                  {item.image ? (
+                    <img src={item.image} alt={item.title} style={{maxWidth:'100px',height:'auto'}} />
+                  ) : '—'}
+                </td>
                 <td>
                   <button onClick={() => editItem(item)}>Editar</button>
                   <button onClick={() => deleteItem(item.id)}>Borrar</button>
