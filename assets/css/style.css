@@ -1,0 +1,11 @@
+*{box-sizing:border-box;margin:0;padding:0}
+:root{--bg:#f7f7fb;--accent:#0b71f5;--muted:#666}
+body{font-family:Inter,Segoe UI,Arial,sans-serif;background:var(--bg);color:#111}
+.container{max-width:980px;margin:32px auto;padding:20px}
+.site-header{padding:20px 0;border-bottom:1px solid #e4e7ef}
+.site-header h1{font-size:1.6rem;margin-bottom:6px}
+.subtitle{color:var(--muted)}
+.reto-section{padding:28px 0}
+.placeholder{color:var(--muted)}
+.site-footer{padding:16px 0;border-top:1px solid #e4e7ef;margin-top:20px}
+@media(min-width:768px){.site-header h1{font-size:2rem}}
