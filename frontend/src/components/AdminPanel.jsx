@@ -164,20 +164,3 @@ export default function AdminPanel({ apiBase, token, user }) {
     </div>
   )
 }
-button {
-  background: var(--primary);
-  color: #fff;
-}
-
-function Header({ theme, setTheme }) {
-  return (
-    <header data-theme={theme}>
-      <h1>Panel Admin</h1>
-      <select value={theme} onChange={e => setTheme(e.target.value)}>
-        <option value="light">Claro</option>
-        <option value="dark">Oscuro</option>
-        <option value="accent">Vibrante</option>
-      </select>
-    </header>
-  );
-}
