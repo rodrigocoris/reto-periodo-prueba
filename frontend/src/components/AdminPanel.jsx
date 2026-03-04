@@ -7,13 +7,16 @@ export default function AdminPanel({ apiBase, token, user }) {
   const [editing, setEditing] = useState(null)
   const [loading, setLoading] = useState(false)
   const [message, setMessage] = useState(null)
+  const [theme, setTheme] = useState(localStorage.getItem('theme') || 'light')
 
   useEffect(() => {
     if (user?.role === 'admin') {
       fetchItems()
       fetchCategories()
     }
-  }, [user])
+    document.documentElement.setAttribute('data-theme', theme)
+    localStorage.setItem('theme', theme)
+  }, [user, theme])
 
   async function fetchItems() {
     try {
@@ -84,6 +87,10 @@ export default function AdminPanel({ apiBase, token, user }) {
     })
   }
 
+  const handleThemeChange = (e) => {
+    setTheme(e.target.value)
+  }
+
   if (user?.role !== 'admin') return <div className="admin-panel"><p>Solo admins pueden acceder</p></div>
 
   return (
@@ -145,6 +152,32 @@ export default function AdminPanel({ apiBase, token, user }) {
           </tbody>
         </table>
       </div>
+
+      <div className="theme-selector">
+        <h4>Seleccionar tema</h4>
+        <select value={theme} onChange={handleThemeChange}>
+          <option value="light">Claro</option>
+          <option value="dark">Oscuro</option>
+          <option value="accent">Vibrante</option>
+        </select>
+      </div>
     </div>
   )
+}
+button {
+  background: var(--primary);
+  color: #fff;
+}
+
+function Header({ theme, setTheme }) {
+  return (
+    <header data-theme={theme}>
+      <h1>Panel Admin</h1>
+      <select value={theme} onChange={e => setTheme(e.target.value)}>
+        <option value="light">Claro</option>
+        <option value="dark">Oscuro</option>
+        <option value="accent">Vibrante</option>
+      </select>
+    </header>
+  );
 }
