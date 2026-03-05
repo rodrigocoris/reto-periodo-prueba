@@ -36,7 +36,7 @@ export default function App(){
       <Header user={user} onLogout={onLogout} theme={theme} setTheme={setTheme} />
       <main className="container">
         {user?.role === 'admin' && <AdminPanel apiBase={API} token={token} user={user} />}
-        <h2>Galería de Ejemplo</h2>
+        <h2>Galería de Arte Contemporáneo</h2>
         <Items apiBase={API} token={token} onLogin={onLogin} />
       </main>
       <footer className="footer">Reto - Periodo de Prueba</footer>

@@ -39,18 +39,25 @@ export default function AdminPanel({ apiBase, token, user }) {
     setLoading(true)
     try {
       if (!form.title || !form.category_id) throw new Error('Título y categoría requeridos')
-      
+
       const url = editing ? `${apiBase}/api/items/${editing.id}` : `${apiBase}/api/items`
       const method = editing ? 'PUT' : 'POST'
-      
+
       const res = await fetch(url, {
         method,
         headers: { 'Content-Type': 'application/json', 'Authorization': `Bearer ${token}` },
         body: JSON.stringify(form)
       })
-      
-      if (!res.ok) throw new Error('Error al guardar')
-      
+
+      if (!res.ok) {
+        let detail = ''
+        try {
+          const data = await res.json()
+          detail = data.error ? `: ${data.error}` : ''
+        } catch (_) {}
+        throw new Error('Error al guardar' + detail)
+      }
+
       setMessage(editing ? 'Actualizado' : 'Creado')
       setForm({ title: '', description: '', category_id: '', image: '' })
       setEditing(null)
@@ -69,7 +76,14 @@ export default function AdminPanel({ apiBase, token, user }) {
         method: 'DELETE',
         headers: { 'Authorization': `Bearer ${token}` }
       })
-      if (!res.ok) throw new Error('Error al eliminar')
+      if (!res.ok) {
+        let detail = ''
+        try {
+          const data = await res.json()
+          detail = data.error ? `: ${data.error}` : ''
+        } catch (_) {}
+        throw new Error('Error al eliminar' + detail)
+      }
       setMessage('Eliminado')
       fetchItems()
     } catch (e) {
@@ -95,7 +109,8 @@ export default function AdminPanel({ apiBase, token, user }) {
 
   return (
     <div className="admin-panel">
-      <h3>Panel Admin - Gestion de Items</h3>
+      <p className="auth-status-top">Sesión iniciada como <strong>{user.username}</strong></p>
+      <h3>Panel Admin - Gestión de Obras de Arte</h3>
       
       <form onSubmit={handleSubmit} className="admin-form">
         <input
@@ -132,7 +147,7 @@ export default function AdminPanel({ apiBase, token, user }) {
       {message && <div className="message">{message}</div>}
 
       <div className="admin-items">
-        <h4>Items ({items.length})</h4>
+        <h4>Obras ({items.length})</h4>
         <table className="items-table">
           <thead>
             <tr>
@@ -156,7 +171,7 @@ export default function AdminPanel({ apiBase, token, user }) {
                     <img src={item.image} alt={item.title} style={{maxWidth:'100px',height:'auto'}} />
                   ) : '—'}
                 </td>
-                <td>
+                <td className="actions-cell">
                   <button onClick={() => editItem(item)}>Editar</button>
                   <button onClick={() => deleteItem(item.id)}>Borrar</button>
                 </td>

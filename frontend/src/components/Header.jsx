@@ -4,7 +4,7 @@ export default function Header({user,onLogout,theme,setTheme}){
   return (
     <header className="site-header">
       <div className="header-inner">
-        <h1>🎨 Galería</h1>
+        <h1>🎨 Galería de Arte</h1>
         <div className="header-controls">
           <select value={theme} onChange={e=>setTheme(e.target.value)} title="Cambiar tema">
             <option value="light">☀️ Claro</option>
@@ -13,8 +13,8 @@ export default function Header({user,onLogout,theme,setTheme}){
           </select>
           {user ? (
             <div className="user-block">
-              <span style={{fontSize:'0.9rem'}}>👤 {user.username}</span>
-              <button onClick={onLogout}>Salir</button>
+              <span className="user-label">👤 {user.username}</span>
+              <button className="logout-button" onClick={onLogout}>Cerrar sesión</button>
             </div>
           ) : (
             <div className="user-block">No autenticado</div>
