@@ -32,6 +32,7 @@ body{font-family:Inter,Segoe UI,Arial,sans-serif;background:var(--bg);margin:0;c
 .admin-panel h3{margin:0 0 24px;color:var(--accent);font-size:22px;font-weight:700}
 .admin-form{display:grid;grid-template-columns:1fr 1fr 1fr 1fr auto auto;gap:12px;margin-bottom:24px;align-items:end;background:var(--border);padding:16px;border-radius:10px}
 .admin-form input,.admin-form textarea,.admin-form select{padding:10px 12px;border:1px solid var(--border);border-radius:6px;font-family:inherit;background:var(--card);color:var(--text-light);transition:all .2s;font-size:14px}
+.admin-form textarea{resize:none;height:40px;overflow-y:auto}
 .admin-form input::placeholder,.admin-form textarea::placeholder{color:var(--text-dark)}
 .admin-form input:focus,.admin-form textarea:focus,.admin-form select:focus{border-color:var(--accent);outline:none;box-shadow:0 0 0 3px rgba(29,209,161,.1)}
 .admin-form button{margin:0;padding:10px 16px;font-size:13px}
