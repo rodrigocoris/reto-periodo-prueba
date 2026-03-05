@@ -18,6 +18,20 @@ let db;
 (async () => {
   db = await initDb();
 
+  // Si la base está vacía (ej. primer deploy en Render), ejecutar seed automáticamente.
+  // Si RESET_AND_SEED=true, forzar seed una vez (para corregir categorías sin usar Shell).
+  try {
+    const row = await db.get('SELECT COUNT(*) as c FROM categories');
+    const forceSeed = process.env.RESET_AND_SEED === 'true';
+    if (forceSeed || (row && row.c === 0)) {
+      const { runSeed } = require('./seed');
+      await runSeed();
+      console.log('Base de datos inicializada con seed automático.');
+    }
+  } catch (e) {
+    console.warn('Seed automático omitido:', e.message);
+  }
+
   // Auth
   app.post('/api/auth/login', async (req, res) => {
     try {
