@@ -33,15 +33,15 @@ export default function Items({apiBase, token, onLogin}){
   return (
     <div className="items-root">
       <aside className="sidebar">
+        <div className="auth">
+          {!token && <Login apiBase={apiBase} onLogin={onLogin} />}
+        </div>
         <h4>Colecciones de arte</h4>
         <div className="cats">
           <button className={!selected? 'active':''} onClick={()=>{ setSelected(null); setPage(1); fetchItems(true); }}>Todas las obras</button>
           {categories.map(c=> (
             <button key={c.id} className={selected===c.name? 'active':''} onClick={()=>{ setSelected(c.name); setPage(1); fetchItems(true); }}>{c.name}</button>
           ))}
-        </div>
-        <div className="auth">
-          {!token && <Login apiBase={apiBase} onLogin={onLogin} />}
         </div>
       </aside>
 
@@ -59,7 +59,7 @@ export default function Items({apiBase, token, onLogin}){
       </section>
 
       <div className="controls">
-        <button onClick={()=>fetchItems(false)} disabled={loading}>{loading? 'Cargando...':'Cargar más'}</button>
+        <button type="button" className="load-more-button" onClick={()=>fetchItems(false)} disabled={loading}>{loading? 'Cargando...':'Cargar más'}</button>
       </div>
     </div>
   )

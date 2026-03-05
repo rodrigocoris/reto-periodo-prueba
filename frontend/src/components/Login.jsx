@@ -17,9 +17,10 @@ export default function Login({apiBase,onLogin}){
 
   return (
     <form className="login-form" onSubmit={submit}>
-      <input placeholder="usuario" value={username} onChange={e=>setUsername(e.target.value)} required />
-      <input placeholder="contraseña" type="password" value={password} onChange={e=>setPassword(e.target.value)} required />
-      <button type="submit">Entrar</button>
+      <h4 className="login-form-title">Iniciar sesión</h4>
+      <input placeholder="Usuario" value={username} onChange={e=>setUsername(e.target.value)} required />
+      <input placeholder="Contraseña" type="password" value={password} onChange={e=>setPassword(e.target.value)} required />
+      <button type="submit" className="login-button">Entrar</button>
       {error && <div className="error">{error}</div>}
     </form>
   )

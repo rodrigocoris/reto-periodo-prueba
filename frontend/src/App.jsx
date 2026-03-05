@@ -39,7 +39,13 @@ export default function App(){
         <h2>Galería de Arte Contemporáneo</h2>
         <Items apiBase={API} token={token} onLogin={onLogin} />
       </main>
-      <footer className="footer">Reto - Periodo de Prueba</footer>
+      <footer className="footer">
+        <span className="footer-brand">Galería de Arte</span>
+        <span className="footer-sep">·</span>
+        <span>Catálogo de obras</span>
+        <span className="footer-sep">·</span>
+        <span>© {new Date().getFullYear()}</span>
+      </footer>
     </div>
   )
 }
