@@ -19,8 +19,6 @@ Sigue estos pasos en orden. Necesitas cuenta en [GitHub](https://github.com), [R
    git push -u origin main
    ```
 
-   Sustituye `TU_USUARIO` y `TU_REPOSITORIO` por tu usuario de GitHub y el nombre del repo.
-
 ---
 
 ## Parte 2: Desplegar el backend en Render

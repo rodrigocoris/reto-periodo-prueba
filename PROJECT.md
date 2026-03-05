@@ -37,13 +37,3 @@ npm run dev
 ✓ SQLite con 3 tablas normalizadas (users, categories, items)
 ✓ Middlewares de autenticación
 ✓ Responsive design
-
-## Próximos pasos disponibles
-
-- Documentación en Postman
-- Tests unitarios (Jest)
-- Despliegue en Vercel/Heroku
-- Video demostrativo
-- Formularios para crear/editar items (admin only)
-
-Dime qué quieres que haga a continuación.
